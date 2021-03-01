@@ -1,0 +1,15 @@
+.count{
+    margin-top: 20px;
+    font-size: 30px;
+    font-weight: bold;
+    text-align: center;
+}
+
+.squareContainer{
+    display: flex;
+    justify-content:center;
+}
+
+.center{
+    margin-top: 20px;
+}
