@@ -1,58 +1,41 @@
-import React from 'react';
-import logo from './logo.svg';
-import { Counter } from './features/counter/Counter';
-import './App.css';
+import React, { Component } from 'react';
+import { connect } from 'react-redux'
+import { INCREMENT, CLEAR_HISTORY } from './Const'
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <Counter />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <span>
-          <span>Learn </span>
-          <a
-            className="App-link"
-            href="https://reactjs.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            React
-          </a>
-          <span>, </span>
-          <a
-            className="App-link"
-            href="https://redux.js.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Redux
-          </a>
-          <span>, </span>
-          <a
-            className="App-link"
-            href="https://redux-toolkit.js.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Redux Toolkit
-          </a>
-          ,<span> and </span>
-          <a
-            className="App-link"
-            href="https://react-redux.js.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            React Redux
-          </a>
-        </span>
-      </header>
-    </div>
-  );
+class App extends Component{
+
+  onIncreaseClick = (rollNumber) => {
+    this.props.dispatch({type:INCREMENT, data: rollNumber})
+  }
+
+  onClearClick = () => {
+      this.props.dispatch({type: CLEAR_HISTORY})
+  }
+  render(){
+    let rollNumber = Math.floor(Math.random() * Math.floor(6))+1;
+    const { sum, rollHistory, onIncreaseClick, onClearClick} = this.props;
+    //console.log(this.props)
+    return(
+      <div className="App">
+        <div>
+          <button onClick={()=>this.onIncreaseClick(rollNumber)}>Roll Dice</button>
+          <button onClick={this.onClearClick}>Clear Dice</button>
+        </div>
+        <div>The sum is {sum}</div>
+        <div>The rollNumber is  {rollNumber}</div>
+        <div>
+          {rollHistory && rollHistory.map((score, index) => {return <div key={index}>{score}</div>})}
+        </div>
+      </div>
+    )
+  }
 }
 
-export default App;
+function mapStateToProps(state){
+  return {
+    sum: state.sum,
+    rollHistory: state.rollHistory
+  }
+}
+
+export default connect(mapStateToProps)(App)
