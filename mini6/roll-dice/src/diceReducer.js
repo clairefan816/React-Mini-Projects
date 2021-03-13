@@ -1,6 +1,6 @@
 import { INCREMENT, CLEAR_HISTORY } from './Const'
 const initState = {
-    sum: 3,
+    sum: 0,
     rollHistory: []
 };
 

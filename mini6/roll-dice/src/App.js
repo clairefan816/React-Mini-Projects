@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import './App.css'
 
 class App extends Component{
 
@@ -13,12 +14,12 @@ class App extends Component{
     return(
       <div className="App">
         <div>
-          <button onClick={()=>onIncreaseClick(this.createRandom())}>Roll Dice</button>
-          <button onClick={onClearClick}>Clear Dice</button>
+          <button className="Buttons" onClick={()=>onIncreaseClick(this.createRandom())}>Roll Dice</button>
+          <button className="Buttons" onClick={onClearClick}>Clear Dice</button>
         </div>
-        <div>The sum is {sum}</div>
-        <div>
-          {rollHistory && rollHistory.map((score, index) => {return <div key={index}>{score}</div>})}
+        <div className="Sum">The sum is {sum}</div>
+        <div className="FlexContainer">
+          {rollHistory && rollHistory.map((score, index) => {return <div className="Box" key={index}><span className="Score">{score}</span></div>})}
         </div>
       </div>
     )
